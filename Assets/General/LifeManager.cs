@@ -2,17 +2,36 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LifeManager : MonoBehaviour
+public abstract class LifeManager
 {
-    // Start is called before the first frame update
-    void Start()
+    private float maxLife;
+    private float currentLife;
+
+    public LifeManager(float maxLife) 
     {
-        
+        this.maxLife = maxLife;
+        currentLife = maxLife;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void TakeDmg(float dmgAmount)
     {
-        
+        currentLife -= dmgAmount;
+        CheckLifeStatus();
     }
+
+    private void CheckLifeStatus()
+    {
+        if (currentLife <= 0)
+        {
+            OnDeath();
+            return;
+        }
+
+        if (currentLife > maxLife)
+        {
+            currentLife = maxLife;
+        }
+    }
+
+    public abstract void OnDeath();
 }
