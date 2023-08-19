@@ -4,32 +4,33 @@ using UnityEngine;
 
 public abstract class LifeManager
 {
-    private float maxLife;
-    private float currentLife;
+    private float maxHealth;
+    private float currentHealth;
 
-    public LifeManager(float maxLife) 
+    public LifeManager(float maxHealth) 
     {
-        this.maxLife = maxLife;
-        currentLife = maxLife;
+        this.maxHealth = maxHealth;
+        currentHealth = maxHealth;
     }
 
-    public void TakeDmg(float dmgAmount)
+    // this method can be used to take damage or healing
+    public void AddToHealth(float changeAmount)
     {
-        currentLife -= dmgAmount;
+        currentHealth += changeAmount;
         CheckLifeStatus();
     }
 
     private void CheckLifeStatus()
     {
-        if (currentLife <= 0)
+        if (currentHealth <= 0)
         {
             OnDeath();
             return;
         }
 
-        if (currentLife > maxLife)
+        if (currentHealth > maxHealth)
         {
-            currentLife = maxLife;
+            currentHealth = maxHealth;
         }
     }
 

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerLifeManager : LifeManager
 {
-    public PlayerLifeManager(float maxLife) : base(maxLife) { }
+    public PlayerLifeManager(float maxHealth) : base(maxHealth) { }
 
     public override void OnDeath()
     {
