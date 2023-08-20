@@ -45,9 +45,10 @@ public class UIStateManager : MonoBehaviour
         precisionBar.executedAction += OnAttackExecution;
     }
 
-    public void OnAttackExecution()
+    public void OnAttackExecution(float precision)
     {
-        player.DealDamage(precisionBar.precisionPercentage);
+        Debug.Log("Precision Percentage: " + precision);
+        player.DealDamage(precision * 10);
         StartCoroutine(DestroyPrecisionBar());
     }
 

@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class Player : Creature
 {
-    [SerializeField] private float health;
-
     public void Start()
     {
+        base.initHealth();
         base.oponent = GameObject.FindGameObjectWithTag("Enemy").GetComponent<Enemy>();
-
-        base.lifeManager = new PlayerLifeManager(health);
+    }
+    public override void OnDeath()
+    {
+        throw new System.NotImplementedException();
     }
 }

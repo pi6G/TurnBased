@@ -15,7 +15,7 @@ public class PrecisionBar : MonoBehaviour
     private Vector3 targetPosition;
     private bool isMovingLeft;
 
-    public delegate void ExecutedAction();
+    public delegate void ExecutedAction(float precision);
     public ExecutedAction executedAction;
 
     [HideInInspector] public float precisionPercentage;
@@ -47,7 +47,7 @@ public class PrecisionBar : MonoBehaviour
         text.fontSize = 20f + 20f * precisionPercentage; 
         text.SetText(((int)(precisionPercentage * 100f)).ToString() + "%");
 
-        executedAction.Invoke();
+        executedAction.Invoke(precisionPercentage);
     }
 
     private void MovePointer()
