@@ -1,11 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public abstract class Creature : MonoBehaviour
 {
     [HideInInspector] public Creature oponent;
+
+    [SerializeField] private TMP_Text text;
+    [SerializeField] private string name;
 
     [Header("HEALTH")]
     [SerializeField] private Image healthBar;
@@ -36,6 +40,7 @@ public abstract class Creature : MonoBehaviour
     protected void InitComponents()
     {
         currentHealth = maxHealth;
+        text.text = name;
         RefreshSprites();
     }
 

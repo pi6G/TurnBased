@@ -25,7 +25,7 @@ public class PrecisionBar : MonoBehaviour
     {
         targetPosition = new Vector3(pointerLimit.position.x / brakingPercentage, pointerLimit.position.y, pointerLimit.position.z);
         isMovingLeft = false;
-        pointerSpeed = UnityEngine.Random.Range(0.5f * difficulty, 1.5f * difficulty);
+        pointerSpeed = UnityEngine.Random.Range(1f + 0.1f * difficulty, 1f + 0.2f * difficulty);
     }
 
     private void Update()

@@ -426,7 +426,6 @@ MonoBehaviour:
   selectSkillCanvas: {fileID: 1918546393}
   AttackButton: {fileID: 2045380601}
   SkillButton: {fileID: 1796225483}
-  playerHand: {fileID: 1371658193}
 --- !u!4 &234661219
 Transform:
   m_ObjectHideFlags: 0
@@ -1817,15 +1816,15 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 24
+  m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 1
   m_HorizontalAlignment: 2
-  m_VerticalAlignment: 256
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -2530,6 +2529,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   oponent: {fileID: 27112276}
+  text: {fileID: 797027674}
+  name: Player
   healthBar: {fileID: 716161703}
   maxHealth: 100
   staminaBar: {fileID: 1744922943}
@@ -2707,10 +2708,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemies:
+  - {fileID: 1522331381133248716, guid: 41232f99e66bc794cb89b09d4bdc95b0, type: 3}
   - {fileID: 1522331381133248716, guid: 09f30d83a4ee058438f3c0124b220c49, type: 3}
-  - {fileID: 1522331381133248716, guid: 09f30d83a4ee058438f3c0124b220c49, type: 3}
-  - {fileID: 1522331381133248716, guid: 09f30d83a4ee058438f3c0124b220c49, type: 3}
-  - {fileID: 1522331381133248716, guid: 09f30d83a4ee058438f3c0124b220c49, type: 3}
+  - {fileID: 1522331381133248716, guid: 41232f99e66bc794cb89b09d4bdc95b0, type: 3}
+  - {fileID: 1522331381133248716, guid: dd316ea5f7c81d34697afcc99a50ac85, type: 3}
+  - {fileID: 1522331381133248716, guid: 41232f99e66bc794cb89b09d4bdc95b0, type: 3}
+  - {fileID: 1522331381133248716, guid: dd316ea5f7c81d34697afcc99a50ac85, type: 3}
+  - {fileID: 1522331381133248716, guid: 3e4556ffcb27e694f88cdab37bd721b5, type: 3}
 --- !u!4 &1108199656
 Transform:
   m_ObjectHideFlags: 0
@@ -4537,6 +4541,10 @@ PrefabInstance:
     - target: {fileID: 1522331381133248717, guid: 09f30d83a4ee058438f3c0124b220c49, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1522331381319046699, guid: 09f30d83a4ee058438f3c0124b220c49, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 24
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 09f30d83a4ee058438f3c0124b220c49, type: 3}
