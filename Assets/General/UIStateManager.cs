@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using UnityEngine;
-using UnityEngine.Events;
+using UnityEngine.UI;
 
 public class UIStateManager : MonoBehaviour
 {
@@ -14,10 +14,10 @@ public class UIStateManager : MonoBehaviour
     // UI ELEMENTS
     [SerializeField] private GameObject buttonsCanvas;
     [SerializeField] private GameObject selectSkillCanvas;
+    [SerializeField] private Button AttackButton;
 
     // SCENE OBJECTS
     private Player player;
-    private Enemy enemy;
 
     private void Start()
     {
@@ -41,14 +41,14 @@ public class UIStateManager : MonoBehaviour
         buttonsCanvas.SetActive(false);
 
         precisionBar = Instantiate(precisionBarPrefab).GetComponent<PrecisionBar>();
-
         precisionBar.executedAction += OnAttackExecution;
     }
 
-    public void OnAttackExecution(float precision)
+    public void OnAttackExecution()
     {
-        Debug.Log("Precision Percentage: " + precision);
-        player.DealDamage(precision * 10);
+        AttackButton.interactable = false;
+        player.DealDamage();
+
         StartCoroutine(DestroyPrecisionBar());
     }
 
@@ -59,4 +59,21 @@ public class UIStateManager : MonoBehaviour
 
         buttonsCanvas.SetActive(true);
     }
+
+    public void OnEndTurn()
+    {
+        AttackButton.interactable = true;
+        GameObject.FindGameObjectWithTag("Enemy").GetComponent<Enemy>().DealDamage();
+    }
+
+    public void CheckStamina()
+    {
+
+    }
+
+    public void OnWin()
+    {
+        Debug.Log("Yaay, ganaste!");
+    }
+    
 }

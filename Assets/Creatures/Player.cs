@@ -6,11 +6,14 @@ public class Player : Creature
 {
     public void Start()
     {
-        base.initHealth();
-        base.oponent = GameObject.FindGameObjectWithTag("Enemy").GetComponent<Enemy>();
+        base.InitHealth();
     }
     public override void OnDeath()
     {
         throw new System.NotImplementedException();
+    }
+    public override void DealDamage()
+    {
+        base.oponent.TakeDamage(PrecisionBar.precisionPercentage * 10);
     }
 }

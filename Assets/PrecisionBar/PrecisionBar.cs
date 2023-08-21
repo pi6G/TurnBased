@@ -9,21 +9,22 @@ public class PrecisionBar : MonoBehaviour
     [SerializeField] private TMP_Text text;
     [SerializeField] private Transform pointer;
     [SerializeField] private Transform pointerLimit;
-    [SerializeField] private float pointerSpeed;
+    private float pointerSpeed;
     [SerializeField, Tooltip("This value should be lower than 1")] private float brakingPercentage;
 
     private Vector3 targetPosition;
     private bool isMovingLeft;
 
-    public delegate void ExecutedAction(float precision);
+    public delegate void ExecutedAction();
     public ExecutedAction executedAction;
 
-    [HideInInspector] public float precisionPercentage;
+    public static float precisionPercentage;
 
     void Start()
     {
         targetPosition = new Vector3(pointerLimit.position.x / brakingPercentage, pointerLimit.position.y, pointerLimit.position.z);
         isMovingLeft = false;
+        pointerSpeed = UnityEngine.Random.Range(0.5f, 3f);
     }
 
     private void Update()
@@ -36,7 +37,7 @@ public class PrecisionBar : MonoBehaviour
     {
         pointerSpeed = 0f;
 
-        float precisionPercentage = 0.1f + (pointerLimit.position.x - Mathf.Abs(pointer.position.x)) / pointerLimit.position.x;
+        precisionPercentage = 0.1f + (pointerLimit.position.x - Mathf.Abs(pointer.position.x)) / pointerLimit.position.x;
 
         if (precisionPercentage > 1) // Perfect Hit
         {
@@ -47,7 +48,7 @@ public class PrecisionBar : MonoBehaviour
         text.fontSize = 20f + 20f * precisionPercentage; 
         text.SetText(((int)(precisionPercentage * 100f)).ToString() + "%");
 
-        executedAction.Invoke(precisionPercentage);
+        executedAction.Invoke();
     }
 
     private void MovePointer()

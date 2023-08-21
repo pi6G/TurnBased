@@ -440,8 +440,8 @@ MonoBehaviour:
   text: {fileID: 5586000045986186866}
   pointer: {fileID: 9212848106779117765}
   pointerLimit: {fileID: 1651812007329136722}
-  pointerSpeed: 1
-  brakingPercentage: 0.6
+  pointerSpeed: 2
+  brakingPercentage: 0.7
   precisionPercentage: 0
 --- !u!1 &5091709695688969956
 GameObject:

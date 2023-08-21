@@ -8,10 +8,10 @@ public abstract class Creature : MonoBehaviour
     [SerializeField] private float maxHealth;
     public float currentHealth;
 
-    protected Creature oponent;
+    public Creature oponent;
     [SerializeField] protected Image healthBar;
 
-    protected void initHealth()
+    protected void InitHealth()
     {
         currentHealth = maxHealth;
     }
@@ -33,11 +33,6 @@ public abstract class Creature : MonoBehaviour
         CheckLifeStatus();
     }
 
-    public void DealDamage(float damageAmount)
-    {
-        oponent.TakeDamage(damageAmount);
-    }
-
     private void CheckLifeStatus()
     {
         if (currentHealth <= 0)
@@ -51,6 +46,8 @@ public abstract class Creature : MonoBehaviour
             currentHealth = maxHealth;
         }
     }
+
+    public abstract void DealDamage();
 
     public abstract void OnDeath();
 }
