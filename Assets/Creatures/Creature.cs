@@ -21,6 +21,8 @@ public abstract class Creature : MonoBehaviour
     [SerializeField] private Transform head;
     [SerializeField] private Transform hand;
 
+    [SerializeField] protected Animations animations;
+
     [Header("SPRITE RENDERERS")]
     [SerializeField] private SpriteRenderer suitSR;
     [SerializeField] private SpriteRenderer hatSR;
@@ -47,6 +49,10 @@ public abstract class Creature : MonoBehaviour
     private void Update()
     {
         healthBar.fillAmount = Mathf.Lerp(healthBar.fillAmount, currentHealth / maxHealth, Time.deltaTime * 5f);
+        staminaBar.fillAmount = Mathf.Lerp(
+            staminaBar.fillAmount, 
+            currentStamina / maxStamina, 
+            Time.deltaTime * 5f);
     }
 
     public void ChangeLife(float changeAmount)
@@ -67,6 +73,11 @@ public abstract class Creature : MonoBehaviour
         {
             currentHealth = maxHealth;
         }
+    }
+
+    public bool canUseSkill()
+    {
+        return currentStamina == maxStamina;
     }
 
     public abstract void Heal();

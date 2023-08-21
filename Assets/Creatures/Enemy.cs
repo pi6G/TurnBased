@@ -8,6 +8,7 @@ public class Enemy : Creature
     public void Start()
     {
         base.InitComponents();
+        base.currentStamina = 0;
         base.oponent = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
     }
 
@@ -19,29 +20,41 @@ public class Enemy : Creature
 
     public override void Attack()
     {
-        base.oponent.ChangeLife(-UnityEngine.Random.Range(1f - randomness, 1f) * 10f * base.weapon.attackBoost / base.oponent.suit.defenseBoost);
+        base.oponent.ChangeLife(-UnityEngine.Random.Range(1f - randomness, 1f) * 5f * base.weapon.attackBoost / base.oponent.suit.defenseBoost);
+        animations.Attack();
     }
 
     public override void SuperAttack()
     {
-        base.oponent.ChangeLife(-UnityEngine.Random.Range(1f - randomness, 1f) * 30f * base.hat.skillBoost / base.oponent.suit.defenseBoost);
+        base.oponent.ChangeLife(-UnityEngine.Random.Range(1f - randomness, 1f) * 15f * base.hat.skillBoost / base.oponent.suit.defenseBoost);
+        animations.Attack();
     }
 
     public override void Heal()
     {
-        if (base.currentStamina == base.maxStamina)
+        if (base.canUseSkill())
         {
-            base.ChangeLife(-UnityEngine.Random.Range(1f - randomness, 1f) * 10f);
+            base.ChangeLife(UnityEngine.Random.Range(1f - randomness, 1f) * 15f);
             base.currentStamina = 0f;
+            animations.Heal();
         }
     }
     public override void OnEndTurn()
     {
-        if (base.currentStamina < base.maxStamina)
+        if (!base.canUseSkill())
         {
+            Attack();
             ++base.currentStamina;
+            return;
         }
 
-        Heal();
+        if (UnityEngine.Random.Range(0, 1f) > 0.5f)
+        {
+            Heal();
+        }
+        else
+        {
+            SuperAttack();
+        }
     }
 }

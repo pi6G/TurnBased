@@ -42,6 +42,7 @@ public class UIStateManager : MonoBehaviour
     {
         buttonsCanvas.SetActive(false);
 
+        PrecisionBar.difficulty = player.weapon.attackDifficulty;
         precisionBar = Instantiate(precisionBarPrefab).GetComponent<PrecisionBar>();
         precisionBar.executedAction += OnAttackExecution;
     }
@@ -49,6 +50,7 @@ public class UIStateManager : MonoBehaviour
     public void OnAttackExecution()
     {
         AttackButton.interactable = false;
+
         player.Attack();
 
         StartCoroutine(DestroyPrecisionBar());
@@ -57,6 +59,7 @@ public class UIStateManager : MonoBehaviour
     {
         selectSkillCanvas.SetActive(false);
 
+        PrecisionBar.difficulty = player.suit.healingDifficulty;
         precisionBar = Instantiate(precisionBarPrefab).GetComponent<PrecisionBar>();
         precisionBar.executedAction += OnHealExecution;
     }
@@ -66,6 +69,24 @@ public class UIStateManager : MonoBehaviour
         SkillButton.interactable = false;
 
         player.Heal();
+
+        StartCoroutine(DestroyPrecisionBar());
+    }
+
+    public void OnSuperAttack()
+    {
+        selectSkillCanvas.SetActive(false);
+
+        PrecisionBar.difficulty = player.hat.skillDifficulty;
+        precisionBar = Instantiate(precisionBarPrefab).GetComponent<PrecisionBar>();
+        precisionBar.executedAction += OnSuperAttackExecution;
+    }
+
+    public void OnSuperAttackExecution()
+    {
+        SkillButton.interactable = false;
+
+        player.SuperAttack();
 
         StartCoroutine(DestroyPrecisionBar());
     }
@@ -81,18 +102,15 @@ public class UIStateManager : MonoBehaviour
     public void OnEndTurn()
     {
         AttackButton.interactable = true;
-        SkillButton.interactable = true;
-        GameObject.FindGameObjectWithTag("Enemy").GetComponent<Enemy>().Attack();
-    }
 
-    public void CheckStamina()
-    {
+        player.OnEndTurn();
+        if (player.canUseSkill()) SkillButton.interactable = true;
 
+        GameObject.FindGameObjectWithTag("Enemy").GetComponent<Enemy>().OnEndTurn();
     }
 
     public void OnWin()
     {
         Debug.Log("Yaay, ganaste!");
     }
-    
 }

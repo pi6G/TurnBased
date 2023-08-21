@@ -19,12 +19,13 @@ public class PrecisionBar : MonoBehaviour
     public ExecutedAction executedAction;
 
     public static float precisionPercentage;
+    public static float difficulty;
 
     void Start()
     {
         targetPosition = new Vector3(pointerLimit.position.x / brakingPercentage, pointerLimit.position.y, pointerLimit.position.z);
         isMovingLeft = false;
-        pointerSpeed = UnityEngine.Random.Range(0.5f, 3f);
+        pointerSpeed = UnityEngine.Random.Range(0.5f * difficulty, 1.5f * difficulty);
     }
 
     private void Update()
