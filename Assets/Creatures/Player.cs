@@ -12,7 +12,7 @@ public class Player : Creature
 
     public override void OnDeath()
     {
-        throw new System.NotImplementedException();
+        FindObjectOfType<UIStateManager>().OnLose();
     }
 
     public override void Attack()

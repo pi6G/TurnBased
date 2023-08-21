@@ -16,10 +16,12 @@ public class UIStateManager : MonoBehaviour
     [SerializeField] private GameObject buttonsCanvas;
     [SerializeField] private GameObject shopCanvas;
     [SerializeField] private GameObject selectSkillCanvas;
+
+    [SerializeField] private GameObject winCanvas;
+    [SerializeField] private GameObject loseCanvas;
+
     [SerializeField] private Button AttackButton;
-
     [SerializeField] private Button SkillButton;
-
 
     [SerializeField] private TMP_Text coins;
 
@@ -132,8 +134,20 @@ public class UIStateManager : MonoBehaviour
         shopCanvas.SetActive(false);
     }
 
+    public void OnExit()
+    {
+        Application.Quit();
+    }
+
     public void OnWin()
     {
-        Debug.Log("Yaay, ganaste!");
+        buttonsCanvas.SetActive(false);
+        winCanvas.SetActive(true);
+    }
+
+    public void OnLose()
+    {
+        buttonsCanvas.SetActive(false);
+        loseCanvas.SetActive(true);
     }
 }
