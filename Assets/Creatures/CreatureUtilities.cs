@@ -22,7 +22,9 @@ public class CreatureUtilities : MonoBehaviour
         player.oponent = Instantiate(enemies[currentEnemy]);
 
         if (currentEnemy == enemies.Length) stateManager.OnWin();
-        
+
+        Shop.money += 1000;
+        stateManager.UpdateCoins();
         ++currentEnemy;
     }
 }

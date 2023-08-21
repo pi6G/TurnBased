@@ -44,7 +44,7 @@ public abstract class Creature : MonoBehaviour
         RefreshSprites();
     }
 
-    protected void RefreshSprites()
+    public void RefreshSprites()
     {
         suitSR.sprite = suit.sprite;
         hatSR.sprite = hat.sprite;

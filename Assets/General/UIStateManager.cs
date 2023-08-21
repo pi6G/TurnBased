@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,10 +14,14 @@ public class UIStateManager : MonoBehaviour
 
     // UI ELEMENTS
     [SerializeField] private GameObject buttonsCanvas;
+    [SerializeField] private GameObject shopCanvas;
     [SerializeField] private GameObject selectSkillCanvas;
     [SerializeField] private Button AttackButton;
 
     [SerializeField] private Button SkillButton;
+
+
+    [SerializeField] private TMP_Text coins;
 
     // SCENE OBJECTS
     private Player player;
@@ -24,6 +29,10 @@ public class UIStateManager : MonoBehaviour
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+    }
+    public void UpdateCoins()
+    {
+        coins.text = Shop.money.ToString();
     }
 
     public void OnSkillButton()
@@ -107,6 +116,20 @@ public class UIStateManager : MonoBehaviour
         if (player.canUseSkill()) SkillButton.interactable = true;
 
         GameObject.FindGameObjectWithTag("Enemy").GetComponent<Enemy>().OnEndTurn();
+    }
+
+    public void OnShopEnter()
+    {
+        buttonsCanvas.SetActive(false);
+        shopCanvas.SetActive(true);
+
+        shopCanvas.GetComponent<Shop>().onShopEnter();
+    }
+
+    public void OnShopExit()
+    {
+        buttonsCanvas.SetActive(true);
+        shopCanvas.SetActive(false);
     }
 
     public void OnWin()
