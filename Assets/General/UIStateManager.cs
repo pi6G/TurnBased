@@ -16,6 +16,8 @@ public class UIStateManager : MonoBehaviour
     [SerializeField] private GameObject selectSkillCanvas;
     [SerializeField] private Button AttackButton;
 
+    [SerializeField] private Button SkillButton;
+
     // SCENE OBJECTS
     private Player player;
 
@@ -47,7 +49,23 @@ public class UIStateManager : MonoBehaviour
     public void OnAttackExecution()
     {
         AttackButton.interactable = false;
-        player.DealDamage();
+        player.Attack();
+
+        StartCoroutine(DestroyPrecisionBar());
+    }
+    public void OnHeal()
+    {
+        selectSkillCanvas.SetActive(false);
+
+        precisionBar = Instantiate(precisionBarPrefab).GetComponent<PrecisionBar>();
+        precisionBar.executedAction += OnHealExecution;
+    }
+
+    public void OnHealExecution()
+    {
+        SkillButton.interactable = false;
+
+        player.Heal();
 
         StartCoroutine(DestroyPrecisionBar());
     }
@@ -63,7 +81,8 @@ public class UIStateManager : MonoBehaviour
     public void OnEndTurn()
     {
         AttackButton.interactable = true;
-        GameObject.FindGameObjectWithTag("Enemy").GetComponent<Enemy>().DealDamage();
+        SkillButton.interactable = true;
+        GameObject.FindGameObjectWithTag("Enemy").GetComponent<Enemy>().Attack();
     }
 
     public void CheckStamina()

@@ -61,6 +61,8 @@ public class PrecisionBar : MonoBehaviour
 
     // Lower values will make the pointer movement more "Linear".
     // Higher values will make the pointer brake more at the end.
+
+    // When using lower values, the speed may seem higher.
     private void CalculateTargetPosition()
     {
         if (!isMovingLeft && pointer.position.x >= targetPosition.x * brakingPercentage)
